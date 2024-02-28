@@ -5,20 +5,22 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import androidx.databinding.DataBindingUtil
+import com.skills.example.databinding.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-        val greetingTextView = findViewById<TextView>(R.id.tv_greeting)
-        val nameEditText = findViewById<EditText>(R.id.et_enter_name)
-        val submitButton = findViewById<Button>(R.id.btn_submit)
-
-        submitButton.setOnClickListener {
-            val name = nameEditText.text.toString()
-            greetingTextView.text = "Hi, $name"
+        binding.btnSubmit.setOnClickListener {
+            binding.apply {
+                val name = etEnterName.text.toString()
+                tvGreeting.text = "Hi, $name"
+            }
         }
+
     }
 }
